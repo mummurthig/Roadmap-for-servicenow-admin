@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ServiceNow Admin — 3-Month Roadmap to ₹15 LPA</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --surface2: #181c24;
+    --border: #1f2433;
+    --accent: #00e5a0;
+    --accent2: #3b82f6;
+    --accent3: #f59e0b;
+    --danger: #ef4444;
+    --text: #e8ecf4;
+    --muted: #6b7a99;
+    --month1: #00e5a0;
+    --month2: #3b82f6;
+    --month3: #a855f7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid noise background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 72px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); background: rgba(0,229,160,0.08);
+    border: 1px solid rgba(0,229,160,0.2); border-radius: 4px;
+    padding: 6px 14px; margin-bottom: 28px;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .hero h1 span { color: var(--accent); }
+
+  .hero-sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.15rem;
+    color: var(--muted);
+    margin-top: 16px;
+  }
+
+  .hero-stats {
+    display: flex; gap: 32px; flex-wrap: wrap;
+    margin-top: 36px;
+  }
+  .stat {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .stat-val {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.5rem;
+  }
+  .stat-val.green { color: var(--accent); }
+  .stat-val.blue  { color: var(--accent2); }
+  .stat-val.amber { color: var(--accent3); }
+  .stat-label { font-size: 11px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
+
+  /* ── SECTION HEADER ── */
+  .sec-header {
+    display: flex; align-items: center; gap: 16px;
+    margin: 56px 0 28px;
+  }
+  .sec-header h2 {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  }
+  .sec-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* ── SYLLABUS GRID ── */
+  .syllabus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2px;
+  }
+  .syl-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .syl-card:hover { background: var(--surface2); border-color: var(--accent); }
+  .syl-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  }
+  .syl-card.c1::before { background: var(--month1); }
+  .syl-card.c2::before { background: var(--month2); }
+  .syl-card.c3::before { background: var(--month3); }
+
+  .syl-num {
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .syl-title {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem;
+    color: var(--text); margin-bottom: 14px;
+  }
+  .syl-items { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .syl-items li {
+    font-size: 12px; color: #8b9ab8; display: flex; align-items: flex-start; gap: 8px;
+    line-height: 1.5;
+  }
+  .syl-items li::before { content: '→'; color: var(--accent); font-size: 11px; margin-top: 1px; flex-shrink: 0; }
+
+  /* ── ROADMAP TIMELINE ── */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+
+  .month-block {
+    display: grid; grid-template-columns: 180px 1fr;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease both;
+  }
+  .month-block:last-child { border-bottom: 1px solid var(--border); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .month-block:nth-child(2) { animation-delay: 0.1s; }
+  .month-block:nth-child(3) { animation-delay: 0.2s; }
+
+  .month-label {
+    display: flex; flex-direction: column; justify-content: flex-start;
+    padding: 28px 20px;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .month-name {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem;
+    line-height: 1;
+  }
+  .m1 .month-name { color: var(--month1); }
+  .m2 .month-name { color: var(--month2); }
+  .m3 .month-name { color: var(--month3); }
+
+  .month-theme {
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-top: 8px; line-height: 1.4;
+  }
+
+  .month-content { padding: 24px 28px; background: var(--surface2); }
+
+  .week-row { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+  .week-row:last-child { margin-bottom: 0; }
+  .week-badge {
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid var(--border); border-radius: 3px;
+    padding: 3px 8px; color: var(--muted); white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+    background: var(--surface);
+  }
+  .week-topics { display: flex; flex-direction: column; gap: 4px; }
+  .week-topics strong {
+    font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.85rem; color: var(--text);
+  }
+  .week-topics span { font-size: 12px; color: #6b7a99; line-height: 1.5; }
+
+  .goal-strip {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 20px; padding: 12px 16px;
+    border-radius: 4px; font-size: 12px;
+  }
+  .m1 .goal-strip { background: rgba(0,229,160,0.06); border-left: 3px solid var(--month1); }
+  .m2 .goal-strip { background: rgba(59,130,246,0.06); border-left: 3px solid var(--month2); }
+  .m3 .goal-strip { background: rgba(168,85,247,0.06); border-left: 3px solid var(--month3); }
+  .goal-strip span { color: var(--muted); }
+  .goal-strip strong { color: var(--text); }
+
+  /* ── CERT & SALARY ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media(max-width:640px) { .two-col { grid-template-columns: 1fr; } }
+
+  .info-card {
+    background: var(--surface); border: 1px solid var(--border); padding: 24px;
+  }
+  .info-card h3 {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 18px;
+  }
+  .cert-item {
+    display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px;
+  }
+  .cert-icon {
+    width: 36px; height: 36px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .cert-icon.g { background: rgba(0,229,160,0.1); }
+  .cert-icon.b { background: rgba(59,130,246,0.1); }
+  .cert-icon.p { background: rgba(168,85,247,0.1); }
+
+  .cert-info strong { display: block; font-size: 13px; color: var(--text); margin-bottom: 3px; }
+  .cert-info span { font-size: 11px; color: var(--muted); }
+
+  .salary-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 12px;
+  }
+  .salary-row:last-child { border-bottom: none; }
+  .salary-row .role { color: var(--muted); }
+  .salary-row .pay { font-family: 'Syne', sans-serif; font-weight: 700; }
+  .salary-row .pay.target { color: var(--accent); font-size: 14px; }
+  .salary-row .pay.above { color: var(--month3); }
+  .salary-row .pay.entry { color: #4b5a78; }
+
+  /* ── TARGET COMPANIES ── */
+  .companies { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .company-tag {
+    font-size: 12px; padding: 6px 14px;
+    border: 1px solid var(--border); border-radius: 3px;
+    color: var(--muted); background: var(--surface);
+    letter-spacing: 0.06em;
+    transition: all 0.2s;
+  }
+  .company-tag:hover { border-color: var(--accent2); color: var(--text); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-section { margin-top: 48px; }
+  .progress-item { margin-bottom: 16px; }
+  .progress-header { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; }
+  .progress-header .label { color: var(--muted); }
+  .progress-header .pct { color: var(--accent); }
+  .bar-track { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 2px; animation: grow 1.2s ease both; }
+  @keyframes grow { from{width:0} }
+  .bar-fill.g { background: var(--month1); }
+  .bar-fill.b { background: var(--month2); }
+  .bar-fill.p { background: var(--month3); }
+  .bar-fill.a { background: var(--accent3); }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 64px; padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+    font-size: 11px; color: #333d55; letter-spacing: 0.08em;
+  }
+
+  @media(max-width:640px){
+    .month-block { grid-template-columns: 1fr; }
+    .month-label { border-right: none; border-bottom: 1px solid var(--border); }
+    .hero-stats { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">
+      <span></span> 3-Month Career Roadmap
+    </div>
+    <h1>ServiceNow Admin<br/><span>₹15 LPA Target</span></h1>
+    <p class="hero-sub">Zero to job-ready — structured syllabus, weekly goals &amp; cert path</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-val green">12 Weeks</span>
+        <span class="stat-label">Duration</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val blue">3 Certs</span>
+        <span class="stat-label">Certifications</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val amber">₹15 LPA</span>
+        <span class="stat-label">Target Salary</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val" style="color:var(--month3)">CSA + CAD</span>
+        <span class="stat-label">Key Certs</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SYLLABUS -->
+  <div class="sec-header">
+    <h2>Full Syllabus</h2><div class="sec-line"></div>
+  </div>
+
+  <div class="syllabus-grid">
+    <div class="syl-card c1">
+      <div class="syl-num">Module 01 · Foundation</div>
+      <div class="syl-title">Platform Fundamentals</div>
+      <ul class="syl-items">
+        <li>ServiceNow architecture — instances, nodes, MID server</li>
+        <li>UI &amp; navigation — Application Navigator, Service Portal</li>
+        <li>Tables, records, fields &amp; data types</li>
+        <li>Forms, lists, views &amp; related lists</li>
+        <li>Users, Groups, Roles &amp; ACLs (Access Control)</li>
+        <li>Import Sets &amp; Transform Maps</li>
+      </ul>
+    </div>
+    <div class="syl-card c1">
+      <div class="syl-num">Module 02 · ITSM Core</div>
+      <div class="syl-title">IT Service Management</div>
+      <ul class="syl-items">
+        <li>Incident Management — lifecycle, SLAs, escalation rules</li>
+        <li>Problem Management — root cause, workarounds</li>
+        <li>Change Management — CAB, types, risk assessment</li>
+        <li>Request Management — catalog items, workflows</li>
+        <li>CMDB — configuration items, relationships, discovery</li>
+        <li>Knowledge Management — articles, feedback loops</li>
+      </ul>
+    </div>
+    <div class="syl-card c1">
+      <div class="syl-num">Module 03 · Automation</div>
+      <div class="syl-title">Workflow &amp; Flow Designer</div>
+      <ul class="syl-items">
+        <li>Legacy Workflow editor — activities, conditions</li>
+        <li>Flow Designer — triggers, actions, subflows</li>
+        <li>Business Rules — before/after/async, script basics</li>
+        <li>Script Includes — reusable server-side logic</li>
+        <li>Client Scripts &amp; UI Policies — dynamic form behavior</li>
+        <li>SLA Definitions &amp; Breach notifications</li>
+      </ul>
+    </div>
+    <div class="syl-card c2">
+      <div class="syl-num">Module 04 · Development</div>
+      <div class="syl-title">Scripting &amp; GlideScript</div>
+      <ul class="syl-items">
+        <li>GlideRecord — CRUD operations in JavaScript</li>
+        <li>GlideSystem — gs.log, gs.getUser, utility methods</li>
+        <li>GlideDate, GlideDateTime — date manipulation</li>
+        <li>Scoped vs Global applications</li>
+        <li>REST API Integration — Inbound/Outbound</li>
+        <li>Web Services — SOAP, REST, JSON payloads</li>
+      </ul>
+    </div>
+    <div class="syl-card c2">
+      <div class="syl-num">Module 05 · Service Catalog</div>
+      <div class="syl-title">Catalog &amp; Portal Design</div>
+      <ul class="syl-items">
+        <li>Catalog items, record producers, order guides</li>
+        <li>Variable types — reference, list, multi-choice</li>
+        <li>Catalog client scripts &amp; variable sets</li>
+        <li>Service Portal — widgets, pages, themes (AngularJS)</li>
+        <li>Employee Center (Next Experience / Polaris)</li>
+        <li>Approval policies &amp; delegation</li>
+      </ul>
+    </div>
+    <div class="syl-card c2">
+      <div class="syl-num">Module 06 · Reporting</div>
+      <div class="syl-title">Analytics &amp; Dashboards</div>
+      <ul class="syl-items">
+        <li>Reports — list, bar, pie, heat map, trend</li>
+        <li>Dashboards — role-based, homepage vs performance</li>
+        <li>Performance Analytics — scores, indicators, breakdowns</li>
+        <li>Scheduled reports &amp; email distribution</li>
+        <li>Filters &amp; conditions — encoded query strings</li>
+        <li>Now Intelligence &amp; AI-assisted insights</li>
+      </ul>
+    </div>
+    <div class="syl-card c3">
+      <div class="syl-num">Module 07 · Advanced Admin</div>
+      <div class="syl-title">Platform Configuration</div>
+      <ul class="syl-items">
+        <li>Update Sets — capturing &amp; migrating customizations</li>
+        <li>Instance cloning strategy (Prod → Dev)</li>
+        <li>Notifications — email, SMS, push templating</li>
+        <li>Domain Separation — multi-tenant setups</li>
+        <li>Scheduled Jobs &amp; Events registry</li>
+        <li>System Diagnostics &amp; Instance health checks</li>
+      </ul>
+    </div>
+    <div class="syl-card c3">
+      <div class="syl-num">Module 08 · SecOps &amp; HRSD</div>
+      <div class="syl-title">Expanded Modules</div>
+      <ul class="syl-items">
+        <li>HR Service Delivery — cases, COEs, journeys</li>
+        <li>SecOps basics — Vulnerability Response, SIEM</li>
+        <li>Customer Service Management (CSM) overview</li>
+        <li>GRC — risk, compliance, audit basics</li>
+        <li>ITOM — Discovery, Event Management overview</li>
+        <li>Now Platform roadmap — Vancouver, Washington releases</li>
+      </ul>
+    </div>
+    <div class="syl-card c3">
+      <div class="syl-num">Module 09 · Interview &amp; Job Prep</div>
+      <div class="syl-title">Placement Readiness</div>
+      <ul class="syl-items">
+        <li>Top 50 ServiceNow Admin interview Q&amp;A</li>
+        <li>Scenario-based questions — ITSM, automation, ACLs</li>
+        <li>Live instance practice — personal developer instance</li>
+        <li>Resume keywords — ATS optimization for SN roles</li>
+        <li>Mock admin tasks — timed exercises</li>
+        <li>Salary negotiation script for ₹15L target</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="sec-header" style="margin-top:64px;">
+    <h2>Monthly Roadmap</h2><div class="sec-line"></div>
+  </div>
+
+  <div class="timeline">
+
+    <!-- MONTH 1 -->
+    <div class="month-block m1">
+      <div class="month-label">
+        <span class="month-name">Month<br/>01</span>
+        <span class="month-theme">Foundation &amp;<br/>ITSM Core</span>
+      </div>
+      <div class="month-content">
+        <div class="week-row">
+          <span class="week-badge">Week 1</span>
+          <div class="week-topics">
+            <strong>Platform Orientation</strong>
+            <span>Sign up for Personal Developer Instance (PDI). Navigate UI, understand tables/records/fields. Admin console tour. Users &amp; Groups setup.</span>
+          </div>
+        </div>
+        <div class="week-row">
+          <span class="week-badge">Week 2</span>
+          <div class="week-topics">
+            <strong>ITSM — Incident &amp; Problem</strong>
+            <span>Configure Incident module. Set SLA definitions. Create Problem records. Practice routing &amp; escalation. ACL hands-on.</span>
+          </div>
+        </div>
+        <div class="week-row">
+          <span class="week-badge">Week 3</span>
+          <div class="week-topics">
+            <strong>Change &amp; Request Management</strong>
+            <span>Standard vs Emergency change types. CAB approval workflows. Service Catalog — create 3 catalog items. Order guide setup.</span>
+          </div>
+        </div>
+        <div class="week-row">
+          <span class="week-badge">Week 4</span>
+          <div class="week-topics">
+            <strong>CMDB &amp; Knowledge Base</strong>
+            <span>CI relationships, auto-discovery concepts. Import Set exercise. Create knowledge articles. Review all Month 1 topics.</span>
+          </div>
+        </div>
+        <div class="goal-strip">
+          <span>🎯 Month Goal:</span>
+          <strong>Complete NowLearning — ServiceNow Administration Fundamentals (free). PDI fully configured.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- MONTH 2 -->
+    <div class="month-block m2">
+      <div class="month-label">
+        <span class="month-name">Month<br/>02</span>
+        <span class="month-theme">Automation &amp;<br/>Development</span>
+      </div>
+      <div class="month-content">
+        <div class="week-row">
+          <span class="week-badge">Week 5</span>
+          <div class="week-topics">
+            <strong>Flow Designer &amp; Workflow</strong>
+            <span>Build 5 flows from scratch — approval, notification, multi-step. Subflows, action library. Legacy workflow migration patterns.</span>
+          </div>
+        </div>
+        <div class="week-row">
+          <span class="week-badge">Week 6</span>
+          <div class="week-topics">
+            <strong>GlideScript Basics</strong>
+            <span>GlideRecord CRUD. Business Rules — before/after insert. Script Includes. Client Scripts — onLoad, onChange. UI Policies.</span>
+          </div>
+        </div>
+        <div class="week-row">
+          <span class="week-badge">Week 7</span>
+          <div class="week-topics">
+            <strong>REST APIs &amp; Integrations</strong>
+            <span>REST message configuration. Inbound REST endpoint creation. MID Server basics. Import via REST. Test with Postman.</span>
+          </div>
+        </div>
+        <div class="week-row">
+          <span class="week-badge">Week 8</span>
+          <div class="week-topics">
+            <strong>Reporting &amp; Dashboards + CSA Prep Start</strong>
+            <span>Build 10 reports, 2 dashboards. Performance Analytics indicators. Begin CSA exam guide. Practice 50 flashcards.</span>
+          </div>
+        </div>
+        <div class="goal-strip">
+          <span>🎯 Month Goal:</span>
+          <strong>Appear for CSA (Certified System Administrator) Exam — ₹300 voucher via NowLearning. Target: Pass.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- MONTH 3 -->
+    <div class="month-block m3">
+      <div class="month-label">
+        <span class="month-name">Month<br/>03</span>
+        <span class="month-theme">Advanced &amp;<br/>Job Hunt</span>
+      </div>
+      <div class="month-content">
+        <div class="week-row">
+          <span class="week-badge">Week 9</span>
+          <div class="week-topics">
+            <strong>Advanced Platform Admin</strong>
+            <span>Update Sets migration. Domain Separation concepts. Scheduled Jobs. Notifications with email templates. Instance cloning strategy.</span>
+          </div>
+        </div>
+        <div class="week-row">
+          <span class="week-badge">Week 10</span>
+          <div class="week-topics">
+            <strong>HR / SecOps / CSM Modules</strong>
+            <span>HRSD case management config. SecOps — Vulnerability Response basics. CSM overview. GRC intro. ServiceNow Store apps.</span>
+          </div>
+        </div>
+        <div class="week-row">
+          <span class="week-badge">Week 11</span>
+          <div class="week-topics">
+            <strong>Mock Interviews &amp; Exercises</strong>
+            <span>50 timed admin tasks on PDI. Top 50 interview Q&amp;A drill. Scenario walkthroughs. Record a 5-min demo video of your PDI.</span>
+          </div>
+        </div>
+        <div class="week-row">
+          <span class="week-badge">Week 12</span>
+          <div class="week-topics">
+            <strong>Active Job Applications</strong>
+            <span>Apply to 20 companies. LinkedIn SN keyword optimization. CAD exam (if time permits). Salary negotiation prep for ₹15L ask.</span>
+          </div>
+        </div>
+        <div class="goal-strip">
+          <span>🎯 Month Goal:</span>
+          <strong>CSA certified. CAD attempted. 3+ interviews lined up. Offer in hand at ₹12–18 LPA range.</strong>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CERT + SALARY -->
+  <div class="sec-header">
+    <h2>Certifications &amp; Salary</h2><div class="sec-line"></div>
+  </div>
+
+  <div class="two-col">
+    <div class="info-card">
+      <h3>Certification Path</h3>
+      <div class="cert-item">
+        <div class="cert-icon g">🏅</div>
+        <div class="cert-info">
+          <strong>CSA — Certified System Administrator</strong>
+          <span>Month 2 target · Core admin cert · Required for all SN roles · Free via NowLearning</span>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon b">⚡</div>
+        <div class="cert-info">
+          <strong>CAD — Certified Application Developer</strong>
+          <span>Month 3 target · Scripting &amp; development · Unlocks ₹18–22L range · $150 USD</span>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon p">🎯</div>
+        <div class="cert-info">
+          <strong>CIS — Certified Implementation Specialist (ITSM)</strong>
+          <span>Post-job target · Module-specific cert · ₹20–30L range · Strongest ROI cert</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h3>Market Salary — Chennai / India</h3>
+      <div class="salary-row">
+        <span class="role">Fresher / 0–1yr SN</span>
+        <span class="pay entry">₹4–7 LPA</span>
+      </div>
+      <div class="salary-row">
+        <span class="role">1–2yr + CSA</span>
+        <span class="pay" style="color:#6b82a8">₹8–12 LPA</span>
+      </div>
+      <div class="salary-row">
+        <span class="role">2–4yr + CSA + CAD</span>
+        <span class="pay target">₹13–18 LPA ← YOU</span>
+      </div>
+      <div class="salary-row">
+        <span class="role">4–7yr + CIS certs</span>
+        <span class="pay above">₹20–30 LPA</span>
+      </div>
+      <div class="salary-row">
+        <span class="role">Lead / Architect (7yr+)</span>
+        <span class="pay above">₹30–50 LPA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILL PROGRESS -->
+  <div class="progress-section">
+    <div class="sec-header">
+      <h2>Skills Coverage by End of 3 Months</h2><div class="sec-line"></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-header"><span class="label">ITSM Core (Incident, Change, Problem, Request)</span><span class="pct">95%</span></div>
+      <div class="bar-track"><div class="bar-fill g" style="width:95%"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-header"><span class="label">Flow Designer &amp; Workflow Automation</span><span class="pct">85%</span></div>
+      <div class="bar-track"><div class="bar-fill g" style="width:85%"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-header"><span class="label">GlideScript / JavaScript (Business Rules, Client Scripts)</span><span class="pct">70%</span></div>
+      <div class="bar-track"><div class="bar-fill b" style="width:70%"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-header"><span class="label">REST API Integration &amp; MID Server</span><span class="pct">65%</span></div>
+      <div class="bar-track"><div class="bar-fill b" style="width:65%"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-header"><span class="label">Service Portal / Employee Center</span><span class="pct">60%</span></div>
+      <div class="bar-track"><div class="bar-fill p" style="width:60%"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-header"><span class="label">Reporting &amp; Performance Analytics</span><span class="pct">80%</span></div>
+      <div class="bar-track"><div class="bar-fill a" style="width:80%"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-header"><span class="label">Advanced Admin (Update Sets, Domain Sep, CMDB)</span><span class="pct">75%</span></div>
+      <div class="bar-track"><div class="bar-fill p" style="width:75%"></div></div>
+    </div>
+  </div>
+
+  <!-- TARGET COMPANIES -->
+  <div class="sec-header">
+    <h2>Target Companies — Chennai + Remote</h2><div class="sec-line"></div>
+  </div>
+  <div class="companies">
+    <span class="company-tag">Accenture</span>
+    <span class="company-tag">Infosys</span>
+    <span class="company-tag">Wipro</span>
+    <span class="company-tag">TCS Digital</span>
+    <span class="company-tag">Cognizant</span>
+    <span class="company-tag">HCLTech</span>
+    <span class="company-tag">Capgemini</span>
+    <span class="company-tag">DXC Technology</span>
+    <span class="company-tag">Hexaware</span>
+    <span class="company-tag">Mphasis</span>
+    <span class="company-tag">Zoho (ITSM)</span>
+    <span class="company-tag">Standard Chartered GBS</span>
+    <span class="company-tag">Citi India Tech</span>
+    <span class="company-tag">Amazon (IT Admin)</span>
+    <span class="company-tag">Freshworks (ITSM Platform)</span>
+    <span class="company-tag">SN Partners (Presidio, Aisera)</span>
+  </div>
+
+  <div class="footer">
+    <span>SERVICENOW ADMIN · 3-MONTH ROADMAP · 2025</span>
+    <span>₹15 LPA TARGET · CSA + CAD CERTS · CHENNAI</span>
+  </div>
+
+</div>
+</body>
+</html>
